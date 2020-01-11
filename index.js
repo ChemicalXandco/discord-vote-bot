@@ -1,3 +1,13 @@
+const Discord = require('discord.js');
+const client = new Discord.Client({
+  autoReconnect: true,
+  messageCacheMaxSize: 10,
+  messageCacheLifetime: 30,
+  messageSweepInterval: 35
+});
+
+const config = require('./data/config.json')
+
 const lastChar = (str) => str.split('').reverse().join(',').replace(',', '')[str.length === str.length + 1 ? 1 : 0];
 const emojiList = ['✅','❎'];
 const emojiLetterList = ['🇦','🇧','🇨','🇩','🇪','🇫','🇬','🇭','🇮','🇯','🇰','🇱','🇲','🇳','🇴','🇵','🇶','🇷','🇸','🇹','🇺','🇻','🇼','🇽','🇾','🇿'];
@@ -8,7 +18,7 @@ function sleep(ms){
   })
 }
 
-const Discord = require('discord.js');
+
 const client = new Discord.Client();
 
 client.once('ready', () => {
@@ -148,4 +158,4 @@ client.on('message', message => {
   }
 });
 
-client.login(); // put your token here
+client.login(config.token);
