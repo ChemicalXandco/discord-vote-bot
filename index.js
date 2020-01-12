@@ -11,26 +11,17 @@ const client = new Discord.Client({
 const color = config.color
 const prefix = config.prefix
 
-const emojiList = ['✅','❎'];
-const emojiLetterList = ['🇦','🇧','🇨','🇩','🇪','🇫','🇬','🇭','🇮','🇯','🇰','🇱','🇲','🇳','🇴','🇵','🇶','🇷','🇸','🇹','🇺','🇻','🇼','🇽','🇾','🇿'];
-
-function sleep(ms){
-  return new Promise(resolve=>{
-    setTimeout(resolve,ms)
-  })
-}
-
 client.once('ready', () => {
 	console.log('Ready!');
   client.user.setActivity('vb!help');
 });
 
-client.on("message", (message) => {
+client.on('message', (message) => {
 
-  const args = message.content.split(" ");
-  const command = message.content.split(" ")[0]
+  const args = message.content.split(' ');
+  const command = message.content.split(' ')[0]
 
-  if(message.author.bot || !command.startsWith(prefix) || message.channel.type === "dm") return;
+  if(message.author.bot || !command.startsWith(prefix) || message.channel.type === 'dm') return;
 
   const cmd = client.commands.get(command.slice(prefix.length))
   if(cmd)
@@ -38,18 +29,18 @@ client.on("message", (message) => {
 })
 
 client.commands = new Discord.Collection();
-  fs.readdir("./data/commands", (err, files) => {
+  fs.readdir('./data/commands', (err, files) => {
     if(err) console.error(err)
-    const jsFiles = files.filter(f => f.split(".").pop() === "js")
+    const jsFiles = files.filter(f => f.split('.').pop() === 'js')
     if(jsFiles.length <= 0) {
-      console.log("No commands loaded")
+      console.log('No commands loaded')
       return;
     }
     console.log('[Commands Loaded] ' + jsFiles.length)
 
     jsFiles.forEach((f, i) => {
-      const props = require("./data/commands/" + f)
-      client.commands.set(props.help.name, props)
+      const props = require('./data/commands/' + f)
+      client.commands.set(props.name, props)
     })
   })
 
