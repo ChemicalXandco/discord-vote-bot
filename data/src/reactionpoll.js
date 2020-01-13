@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 const lastChar = (str) => str.split('').reverse().join(',').replace(',', '')[str.length === str.length + 1 ? 1 : 0];
 
 function sleep(ms){
@@ -17,7 +19,7 @@ module.exports = {
             let reactionArray = [];
             let count = 0;
             for (var option in options) {
-            reactionArray[count] = await message.react(emojiList[count]);
+            reactionArray[count] = await message.react(emojiList[count]).catch((err) => message.edit(embed.addField('Error', err)));
             count += 1
             }
 
@@ -28,7 +30,9 @@ module.exports = {
                 await sleep(time*60000)
                 var reactionCountsArray = [];                               
                 for (var i = 0; i < reactionArray.length; i++) {
-                    reactionCountsArray[i] = message.reactions.get(emojiList[i]).count-1;
+                    try {
+                        reactionCountsArray[i] = message.reactions.get(emojiList[i]).count-1;
+                    } catch(err) {}
                 }
 
                 // Find winner(s)
@@ -47,6 +51,10 @@ module.exports = {
                     }
                 }
                 message.edit(embed.addField('Result', winnersText));
+                message.channel.send(new Discord.RichEmbed()
+                .setColor(embed.color)
+                .setTitle('Poll done')
+                .setDescription('Message link: '+message.url))
                 });
             }
         })

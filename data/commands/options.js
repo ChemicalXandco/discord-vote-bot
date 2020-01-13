@@ -5,7 +5,7 @@ const emojiList = ['🇦','🇧','🇨','🇩','🇪','🇫','🇬','🇭','🇮
 
 module.exports.run = (client, message, args, config, color) => {
 
-        var options = args.slice(2, -1).join(' ').split(';')
+        var options = args.slice(2).join(' ').split(';')
 
         if (options.length > 20) {
                 options = options.slice(0, 20)

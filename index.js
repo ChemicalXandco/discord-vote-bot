@@ -13,7 +13,7 @@ const prefix = config.prefix
 
 client.once('ready', () => {
 	console.log('Ready!');
-  client.user.setActivity('vb!help');
+  client.user.setActivity(prefix+'help');
 });
 
 client.on('message', (message) => {
