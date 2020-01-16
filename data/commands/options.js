@@ -1,11 +1,15 @@
 const Discord = require('discord.js');
-const reactionpoll = require('../src/reactionpoll')
+const reactionpoll = require('../utils/reactionpoll')
 
 const emojiList = ['🇦','🇧','🇨','🇩','🇪','🇫','🇬','🇭','🇮','🇯','🇰','🇱','🇲','🇳','🇴','🇵','🇶','🇷','🇸','🇹','🇺','🇻','🇼','🇽','🇾','🇿'];
 
 module.exports.run = (client, message, args, config, color) => {
 
-        var options = args.slice(2).join(' ').split(';')
+        args.shift()
+        var time = args.shift()
+        
+        var options = args.join(' ').split(';')
+        var question = options.pop()
 
         if (options.length > 20) {
                 options = options.slice(0, 20)
@@ -17,14 +21,16 @@ module.exports.run = (client, message, args, config, color) => {
         optionText += '\n'+emojiList[count]+' - '+options[option]
         count += 1
         }
+
+        var pollText = "*Ends in "+time+" minutes*"
     
         var embed = new Discord.RichEmbed()
         .setColor(color)
-        .setTitle('Option poll')
+        .setTitle(question)
         .setAuthor(message.member.user.tag, message.member.user.avatarURL)
-        .setDescription(optionText)
+        .setDescription(pollText + optionText)
 
-        return reactionpoll.run(args[1], options, message, embed, emojiList)
+        return reactionpoll.run(time, options, message, embed, emojiList)
     
 }
 module.exports.name = 'options'

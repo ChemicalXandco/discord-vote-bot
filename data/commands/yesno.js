@@ -1,17 +1,21 @@
 const Discord = require('discord.js');
-const reactionpoll = require('../src/reactionpoll')
+const reactionpoll = require('../utils/reactionpoll')
 
 const emojiList = ['✅','❎'];
 
 module.exports.run = (client, message, args, config, color) => {
+
+        args.shift()
+        var time = args.shift()
+        var question = args.join(' ')
     
         var embed = new Discord.RichEmbed()
         .setColor(color)
-        .setTitle('Yes/no poll')
+        .setTitle(question)
         .setAuthor(message.member.user.tag, message.member.user.avatarURL)
-        .setDescription(args[2])
+        .setDescription("*Ends in "+time+" minutes*")
 
-        return reactionpoll.run(args[1], ['Yes', 'No'], message, embed, emojiList)
+        return reactionpoll.run(time, ['Yes', 'No'], message, embed, emojiList)
     
 }
 module.exports.name = 'yesno'

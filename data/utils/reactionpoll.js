@@ -53,7 +53,7 @@ module.exports = {
                 message.edit(embed.addField('Result', winnersText));
                 message.channel.send(new Discord.RichEmbed()
                 .setColor(embed.color)
-                .setTitle('Poll done')
+                .setTitle('Poll done: '+embed.title)
                 .setDescription('Message link: '+message.url))
                 });
             }
