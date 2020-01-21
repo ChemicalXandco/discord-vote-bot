@@ -33,4 +33,3 @@ module.exports.run = (client, message, args, config, color) => {
         return reactionpoll.run(time, options, message, embed, emojiList)
     
 }
-module.exports.name = 'options'

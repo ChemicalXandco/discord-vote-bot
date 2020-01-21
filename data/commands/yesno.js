@@ -18,4 +18,3 @@ module.exports.run = (client, message, args, config, color) => {
         return reactionpoll.run(time, ['Yes', 'No'], message, embed, emojiList)
     
 }
-module.exports.name = 'yesno'

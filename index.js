@@ -40,7 +40,7 @@ client.commands = new Discord.Collection();
 
     jsFiles.forEach((f, i) => {
       const props = require('./data/commands/' + f)
-      client.commands.set(props.name, props)
+      client.commands.set(f.slice(0, -3), props)
     })
   })
 
