@@ -78,3 +78,6 @@ typings/
 
 # rollup.js default build output
 dist/
+
+### discord-vote-bot ###
+update-config.json
