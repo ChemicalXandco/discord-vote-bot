@@ -74,7 +74,6 @@ finally:
         botConfig['version'] = version
         json.dump(botConfig, f, indent=4)
         f.close()
-'''
 
 if config['ssh']:
     print('ssh start')
@@ -102,4 +101,3 @@ if config['ssh']:
     client.close()
 
     print('ssh complete')
-'''
