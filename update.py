@@ -5,6 +5,7 @@ file "update-config.json" should have:
 {
     "user": "",
     "password": "",
+    "email": "",
     "repository": "ChemicalXandco/discord-vote-bot",
     "ssh": false,
 }
@@ -52,18 +53,19 @@ try:
     branch = repo.get_branch('master')
     sha = repo.get_commits(branch.commit.sha)[0].sha
 
-    user = g.get_user()
     tagger = InputGitAuthor(
-        name=user.name,
-        email=user.email,
+        name=config['user'],
+        email=config['email'],
         date=datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ')
     )
 
-    create_git_tag('v{}'.format(version),
+    t = repo.create_git_tag('v{}'.format(version),
                    message,
                    sha,
                    'commit',
                    tagger)
+    repo.create_git_ref('refs/tags/{}'.format(t.tag), t.sha)
+    print('tag create success')
 except Exception as e:
     print('Error:', str(e))
     version = botConfig['version']
@@ -72,13 +74,13 @@ finally:
         botConfig['version'] = version
         json.dump(botConfig, f, indent=4)
         f.close()
-
+'''
 
 if config['ssh']:
+    print('ssh start')
     import paramiko
 
     commands = [
-        'cd discord-vote-bot',
         'git fetch',
         'git stash',
         'git pull',
@@ -91,10 +93,13 @@ if config['ssh']:
     client.connect(config['ssh_ip'], username=config['ssh_user'], password=config['ssh_password'])
     
     for command in commands:
-        stdin, stdout, stderr = client.exec_command(command)
+        stdin, stdout, stderr = client.exec_command('cd discord-vote-bot; '+command)
         for line in stdout:
             print('... ' + line.strip('\n'))
+        for line in stderr:
+            print('... ' + line.strip('\n'))
 
-        if stderr != '':
-            print(stderr)
+    client.close()
 
+    print('ssh complete')
+'''
