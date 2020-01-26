@@ -13,7 +13,7 @@ const prefix = config.prefix
 
 client.once('ready', () => {
 	console.log('Ready!');
-  client.user.setActivity(prefix+'help');
+  client.user.setActivity('for '+prefix+'help', { type: 'WATCHING' });
 });
 
 client.on('message', (message) => {
