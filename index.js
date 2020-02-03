@@ -1,6 +1,17 @@
 const Discord = require('discord.js');
-const fs = require('fs')
-const config = require('./data/config.json')
+const fs = require('fs');
+const config = require('./data/config.json');
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.File({ filename: './combined.log' })
+  ],
+  exceptionHandlers: [
+    new winston.transports.File({ filename: './exceptions.log' })
+  ],
+  exitOnError: false
+});
 
 const client = new Discord.Client({
   autoReconnect: true,
