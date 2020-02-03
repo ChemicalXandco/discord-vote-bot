@@ -31,6 +31,6 @@ module.exports.run = (client, message, args, config, color) => {
         .setDescription(pollText + optionText)
 
         message.channel.send(embed)
-        .then(message => reactionpoll.run(time, options, message, embed, emojiList))
+        .then(message => reactionpoll.run(time, options, message, embed, emojiList, true))
     
 }

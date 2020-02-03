@@ -16,6 +16,6 @@ module.exports.run = (client, message, args, config, color) => {
         .setDescription("*Ends in "+time+" minutes*")
 
         message.channel.send(embed)
-        .then(message => reactionpoll.run(time, ['Yes', 'No'], message, embed, emojiList))
+        .then(message => reactionpoll.run(time, ['Yes', 'No'], message, embed, emojiList, true))
     
 }

@@ -9,12 +9,15 @@ function sleep(ms){
   }
 
 module.exports = {
-    run: async function (time, options, message, embed, emojiList) {
+    run: async function (time, options, message, embed, emojiList, isNew) {
         let reactionArray = [];
         let count = 0;
-        for (var option in options) {
-        reactionArray[count] = await message.react(emojiList[count]).catch((err) => message.edit(embed.addField('Error', err)));
-        count += 1
+
+        if (isNew) {
+            for (var option in options) {
+            reactionArray[count] = await message.react(emojiList[count]).catch((err) => message.edit(embed.addField('Error', err)));
+            count += 1
+            }
         }
 
         if (time) {
