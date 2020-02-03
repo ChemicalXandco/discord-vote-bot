@@ -15,6 +15,7 @@ module.exports.run = (client, message, args, config, color) => {
         .setAuthor(message.member.user.tag, message.member.user.avatarURL)
         .setDescription("*Ends in "+time+" minutes*")
 
-        return reactionpoll.run(time, ['Yes', 'No'], message, embed, emojiList)
+        message.channel.send(embed)
+        .then(message => reactionpoll.run(time, ['Yes', 'No'], message, embed, emojiList))
     
 }

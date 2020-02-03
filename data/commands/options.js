@@ -30,6 +30,7 @@ module.exports.run = (client, message, args, config, color) => {
         .setAuthor(message.member.user.tag, message.member.user.avatarURL)
         .setDescription(pollText + optionText)
 
-        return reactionpoll.run(time, options, message, embed, emojiList)
+        message.channel.send(embed)
+        .then(message => reactionpoll.run(time, options, message, embed, emojiList))
     
 }
