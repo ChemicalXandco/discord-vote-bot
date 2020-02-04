@@ -1,7 +1,10 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const config = require('./data/config.json');
 const winston = require('winston');
+
+const config = require('./data/config.json');
+const reactionpoll = require('./data/utils/reactionpoll');
+const cache = require('./data/utils/cache');
 
 const logger = winston.createLogger({
   transports: [
@@ -25,6 +28,16 @@ const prefix = config.prefix
 client.once('ready', () => {
 	console.log('Ready!');
   client.user.setActivity('for '+prefix+'help', { type: 'WATCHING' });
+
+  let file = JSON.parse(fs.readFileSync('./cache.json'))
+  Object.keys(file).forEach(uid => {
+    let channel = client.channels.get(file[uid]["message"]["channelId"])
+    channel.fetchMessage(file[uid]["message"]["id"]).then(function (message) {
+      file[uid]["message"] = message;
+      reactionpoll.run(uid, ...Object.values(file[uid]), false)
+    })
+  })
+  logger.log('info', 'successfully restored cache');
 });
 
 client.on('message', (message) => {

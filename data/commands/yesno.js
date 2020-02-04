@@ -1,4 +1,6 @@
 const Discord = require('discord.js');
+const uuidv1 = require('uuid/v1');
+
 const reactionpoll = require('../utils/reactionpoll')
 
 const emojiList = ['✅','❎'];
@@ -16,6 +18,6 @@ module.exports.run = (client, message, args, config, color) => {
         .setDescription("*Ends in "+time+" minutes*")
 
         message.channel.send(embed)
-        .then(message => reactionpoll.run(time, ['Yes', 'No'], message, embed, emojiList, true))
+        .then(message => reactionpoll.run(uuidv1(), time, ['Yes', 'No'], message, embed, emojiList, true))
     
 }

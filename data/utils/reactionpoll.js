@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 
+const cache = require('./cache')
+
 const lastChar = (str) => str.split('').reverse().join(',').replace(',', '')[str.length === str.length + 1 ? 1 : 0];
 
 function sleep(ms){
@@ -9,16 +11,18 @@ function sleep(ms){
   }
 
 module.exports = {
-    run: async function (time, options, message, embed, emojiList, isNew) {
+    run: async function (uid, time, options, message, embed, emojiList, isNew) {
         let reactionArray = [];
         let count = 0;
 
         if (isNew) {
             for (var option in options) {
-            reactionArray[count] = await message.react(emojiList[count]).catch((err) => message.edit(embed.addField('Error', err)));
-            count += 1
+                reactionArray[count] = await message.react(emojiList[count]).catch((err) => message.edit(embed.addField('Error', err)));
+                count += 1
             }
-        }
+
+            cache.save(uid, cache.form(time, options, message, embed, emojiList))
+        } 
 
         if (time) {
         // Re-fetch the message and get reaction counts
@@ -51,6 +55,8 @@ module.exports = {
             message.channel.send(new Discord.RichEmbed()
             .setColor(embed.color)
             .setDescription('Poll done ([message link]('+message.url+'))'))
+
+            cache.del(uid)
             });
         }
     }
