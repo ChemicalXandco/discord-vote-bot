@@ -1,19 +1,20 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 
+const cacheFile = './cache.json'
+
 var getCache = function () {
-    file = fs.readFileSync('./cache.json')
+    file = fs.readFileSync(cacheFile)
     return JSON.parse(file)
 }
 
 var saveCache = function (cache) {
     let file = JSON.stringify(cache);
-    fs.writeFileSync('./cache.json', file);
+    fs.writeFileSync(cacheFile, file);
 }
 
 module.exports = {
     form: function (time, options, message, embed, emojiList) {
-        console.warn("hello")
         let cache = {
             "time": time,
             "options": options,
@@ -21,18 +22,14 @@ module.exports = {
             "embed": embed,
             "emojiList": emojiList
         }
-        console.warn("hello")
-        console.warn(JSON.stringify(cache))
+        
         return cache
     },
 
     save: function (uid, settings) {
-        console.warn("hello")
         let cache = getCache()
-        console.warn("bye")
         cache[uid] = settings
         saveCache(cache)
-        console.warn("hello")
     },
 
     del: function (uid) {

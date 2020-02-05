@@ -22,7 +22,9 @@ module.exports = {
             }
 
             cache.save(uid, cache.form(time, options, message, embed, emojiList))
-        } 
+        } else {
+            embed = new Discord.RichEmbed(embed);
+        }
 
         if (time) {
         // Re-fetch the message and get reaction counts
@@ -30,7 +32,7 @@ module.exports = {
             .then(async function (message) {
             await sleep(time*60000)
             var reactionCountsArray = [];                               
-            for (var i = 0; i < reactionArray.length; i++) {
+            for (var i = 0; i < options.length; i++) {
                 try {
                     reactionCountsArray[i] = message.reactions.get(emojiList[i]).count-1;
                 } catch(err) {}
@@ -48,9 +50,10 @@ module.exports = {
                 winnersText = 'No one voted!'
             } else {
                 for (var i = 0; i < indexMax.length; i++) {
-                winnersText += emojiList[indexMax[i]] + ': ' + options[indexMax[i]] + ' (' + reactionCountsArray[indexMax[i]] + ' vote(s))\n';
+                    winnersText += emojiList[indexMax[i]] + ': ' + options[indexMax[i]] + ' (' + reactionCountsArray[indexMax[i]] + ' vote(s))\n';
                 }
             }
+
             message.edit(embed.addField('Result', winnersText));
             message.channel.send(new Discord.RichEmbed()
             .setColor(embed.color)

@@ -29,7 +29,17 @@ client.once('ready', () => {
 	console.log('Ready!');
   client.user.setActivity('for '+prefix+'help', { type: 'WATCHING' });
 
-  let file = JSON.parse(fs.readFileSync('./cache.json'))
+  try {
+    let file = JSON.parse(fs.readFileSync('./cache.json'))
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      fs.writeFile('./cache.json', '{}', function (err) {
+        if (err) throw err;
+        let file = JSON.parse(fs.readFileSync('./cache.json'))
+        logger.log('info', 'successfully created cache.json');
+      }); 
+    }
+  }
   Object.keys(file).forEach(uid => {
     let channel = client.channels.get(file[uid]["message"]["channelId"])
     channel.fetchMessage(file[uid]["message"]["id"]).then(function (message) {
