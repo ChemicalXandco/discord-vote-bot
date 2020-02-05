@@ -26,7 +26,8 @@ const color = config.color
 const prefix = config.prefix
 
 client.once('ready', () => {
-  client.user.setActivity('for '+prefix+'help', { type: 'WATCHING' });
+  //client.user.setActivity('for '+prefix+'help', { type: 'WATCHING' });
+  client.user.setActivity(prefix+'help');
 
   try {
     var file = fs.readFileSync('./cache.json')
@@ -36,8 +37,7 @@ client.once('ready', () => {
       var file = fs.readFileSync('./cache.json')
     }
   }
-  console.log('test');
-  console.log(file);
+
   Object.keys(JSON.parse(file)).forEach(uid => {
     let channel = client.channels.get(file[uid]["message"]["channelId"])
     channel.fetchMessage(file[uid]["message"]["id"]).then(function (message) {

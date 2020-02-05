@@ -22,11 +22,12 @@ module.exports.run = (client, message, args, config, color) => {
                 '\nUptime: ' + uptime,
                 true)
         .addField('Privacy',
-                client.user.username + ' does not store poll data permanently, it is deleted when the poll ends.',
+                client.user.username + ' stores data temporarily incase the bot restarts so polls can be resumed.',
                 true)
         .addField('Links',
                 'Source: https://github.com/ChemicalXandco/discord-vote-bot\n' +
-                'Discord bots listing (Please vote if you find this bot useful): https://top.gg/bot/541310790658031626')
+                'Discord bots listing (Please vote if you find this bot useful): https://top.gg/bot/541310790658031626' +
+                'Support server: https://discord.gg/wbt5aYS')
                         
         return message.channel.send(embed)
     

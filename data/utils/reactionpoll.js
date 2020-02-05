@@ -26,6 +26,11 @@ module.exports = {
             embed = new Discord.RichEmbed(embed);
         }
 
+        if (isNaN(time)) {
+            message.edit(embed.addField('Error', 'time "' + time + '" is not a number'));
+            cache.del(uid)
+        }
+
         if (time) {
         // Re-fetch the message and get reaction counts
         message.channel.fetchMessage(message.id)
