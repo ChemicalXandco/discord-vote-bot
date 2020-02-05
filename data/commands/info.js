@@ -26,7 +26,7 @@ module.exports.run = (client, message, args, config, color) => {
                 true)
         .addField('Links',
                 'Source: https://github.com/ChemicalXandco/discord-vote-bot\n' +
-                'Discord bots listing (Please vote if you find this bot useful): https://top.gg/bot/541310790658031626' +
+                'Discord bots listing (Please vote if you find this bot useful): https://top.gg/bot/541310790658031626\n' +
                 'Support server: https://discord.gg/wbt5aYS')
                         
         return message.channel.send(embed)
