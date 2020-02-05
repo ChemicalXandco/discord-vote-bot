@@ -4,7 +4,7 @@ const fs = require('fs');
 const cacheFile = './cache.json'
 
 var getCache = function () {
-    file = fs.readFileSync(cacheFile)
+    let file = fs.readFileSync(cacheFile)
     return JSON.parse(file)
 }
 
