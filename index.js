@@ -26,8 +26,15 @@ const color = config.color
 const prefix = config.prefix
 
 client.once('ready', () => {
-  //client.user.setActivity('for '+prefix+'help', { type: 'WATCHING' });
-  client.user.setActivity(prefix+'help');
+  setInterval(() => {
+    client.user.setPresence({
+      status: "online",
+      game: {
+          name: 'for '+prefix+'help',
+          type: "WATCHING"
+      }
+    });
+  }, 900000); // Runs this every 15 minutes.
 
   try {
     var file = fs.readFileSync('./cache.json')
