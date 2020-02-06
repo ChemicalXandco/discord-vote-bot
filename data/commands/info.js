@@ -22,7 +22,7 @@ module.exports.run = (client, message, args, config, color) => {
                 '\nUptime: ' + uptime,
                 true)
         .addField('Privacy',
-                client.user.username + ' stores data temporarily incase the bot restarts so polls can be resumed.',
+                client.user.username + ' stores data temporarily in case the bot restarts so polls can be resumed.',
                 true)
         .addField('Links',
                 'Source: https://github.com/ChemicalXandco/discord-vote-bot\n' +

@@ -37,19 +37,20 @@ client.once('ready', () => {
   }, 900000); // Runs this every 15 minutes.
 
   try {
-    var file = fs.readFileSync('./cache.json')
+    var file = fs.readFileSync('./cache.json', 'utf8')
   } catch (err) {
     if (err.code === 'ENOENT') {
-      fs.writeFileSync('./cache.json', '{}')
-      var file = fs.readFileSync('./cache.json')
+      fs.writeFileSync('./cache.json', '{}', 'utf8')
+      var file = fs.readFileSync('./cache.json', 'utf8')
     }
   }
+  var cacheFile = JSON.parse(file)
 
-  Object.keys(JSON.parse(file)).forEach(uid => {
-    let channel = client.channels.get(file[uid]["message"]["channelId"])
-    channel.fetchMessage(file[uid]["message"]["id"]).then(function (message) {
-      file[uid]["message"] = message;
-      reactionpoll.run(uid, ...Object.values(file[uid]), false)
+  Object.keys(cacheFile).forEach(uid => {
+    let channel = client.channels.get(cacheFile[uid]["message"]["channelId"])
+    channel.fetchMessage(cacheFile[uid]["message"]["id"]).then(function (message) {
+      cacheFile[uid]["message"] = message;
+      reactionpoll.run(uid, ...Object.values(cacheFile[uid]), false)
     })
   })
   logger.log('info', 'successfully restored cache');

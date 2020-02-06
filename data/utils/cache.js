@@ -4,13 +4,13 @@ const fs = require('fs');
 const cacheFile = './cache.json'
 
 var getCache = function () {
-    let file = fs.readFileSync(cacheFile)
+    let file = fs.readFileSync(cacheFile, 'utf8')
     return JSON.parse(file)
 }
 
 var saveCache = function (cache) {
     let file = JSON.stringify(cache);
-    fs.writeFileSync(cacheFile, file);
+    fs.writeFileSync(cacheFile, file, 'utf8');
 }
 
 module.exports = {
