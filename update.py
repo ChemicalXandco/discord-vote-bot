@@ -92,7 +92,7 @@ if config['ssh']:
     client.connect(config['ssh_ip'], username=config['ssh_user'], password=config['ssh_password'])
     
     for command in commands:
-        stdin, stdout, stderr = client.exec_command('cd discord-vote-bot; '+command)
+        stdin, stdout, stderr = client.exec_command('cd vb; '+command)
         for line in stdout:
             print('... ' + line.strip('\n'))
         for line in stderr:
