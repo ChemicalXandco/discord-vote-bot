@@ -29,42 +29,41 @@ module.exports = {
         if (isNaN(time)) {
             message.edit(embed.addField('Error', 'time "' + time + '" is not a number'));
             cache.del(uid)
-        }
-
-        if (time) {
-        // Re-fetch the message and get reaction counts
-        message.channel.fetchMessage(message.id)
+        } else {
+            var timeElapsed = new Date()-message.createdAt
+            // Re-fetch the message and get reaction counts
+            message.channel.fetchMessage(message.id)
             .then(async function (message) {
-            await sleep(time*60000)
-            var reactionCountsArray = [];                               
-            for (var i = 0; i < options.length; i++) {
-                try {
-                    reactionCountsArray[i] = message.reactions.get(emojiList[i]).count-1;
-                } catch(err) {}
-            }
-
-            // Find winner(s)
-            var max = -Infinity, indexMax = [];
-            for(var i = 0; i < reactionCountsArray.length; ++i)
-                if(reactionCountsArray[i] > max) max = reactionCountsArray[i], indexMax = [i];
-                else if(reactionCountsArray[i] === max) indexMax.push(i);
-
-            // Display winner(s)
-            var winnersText = '';
-            if (reactionCountsArray[indexMax[0]] == 0) {
-                winnersText = 'No one voted!'
-            } else {
-                for (var i = 0; i < indexMax.length; i++) {
-                    winnersText += emojiList[indexMax[i]] + ': ' + options[indexMax[i]] + ' (' + reactionCountsArray[indexMax[i]] + ' vote(s))\n';
+                await sleep((time*60000)-timeElapsed)
+                var reactionCountsArray = [];                               
+                for (var i = 0; i < options.length; i++) {
+                    try {
+                        reactionCountsArray[i] = message.reactions.get(emojiList[i]).count-1;
+                    } catch(err) {}
                 }
-            }
 
-            message.edit(embed.addField('Result', winnersText));
-            message.channel.send(new Discord.RichEmbed()
-            .setColor(embed.color)
-            .setDescription('Poll done ([message link]('+message.url+'))'))
+                // Find winner(s)
+                var max = -Infinity, indexMax = [];
+                for(var i = 0; i < reactionCountsArray.length; ++i)
+                    if(reactionCountsArray[i] > max) max = reactionCountsArray[i], indexMax = [i];
+                    else if(reactionCountsArray[i] === max) indexMax.push(i);
 
-            cache.del(uid)
+                // Display winner(s)
+                var winnersText = '';
+                if (reactionCountsArray[indexMax[0]] == 0) {
+                    winnersText = 'No one voted!'
+                } else {
+                    for (var i = 0; i < indexMax.length; i++) {
+                        winnersText += emojiList[indexMax[i]] + ': ' + options[indexMax[i]] + ' (' + reactionCountsArray[indexMax[i]] + ' vote(s))\n';
+                    }
+                }
+
+                message.edit(embed.addField('Result', winnersText));
+                message.channel.send(new Discord.RichEmbed()
+                .setColor(embed.color)
+                .setDescription('Poll done ([message link]('+message.url+'))'))
+
+                cache.del(uid)
             });
         }
     }
