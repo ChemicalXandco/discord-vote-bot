@@ -47,11 +47,13 @@ client.once('ready', () => {
   var cacheFile = JSON.parse(file)
 
   Object.keys(cacheFile).forEach(uid => {
-    let channel = client.channels.get(cacheFile[uid]["message"]["channelId"])
-    channel.fetchMessage(cacheFile[uid]["message"]["id"]).then(function (message) {
-      cacheFile[uid]["message"] = message;
-      reactionpoll.run(uid, ...Object.values(cacheFile[uid]), false)
-    })
+    try {
+      let channel = client.channels.get(cacheFile[uid]["message"]["channelId"])
+      channel.fetchMessage(cacheFile[uid]["message"]["id"])
+        .then(message => reactionpoll.run(uid, cacheFile[uid]['time'], cacheFile[uid]['options'], message, cacheFile[uid]['embed'], cacheFile[uid]['emojiList'], false))
+    } catch (err) {
+      cache.del(uid)
+    }
   })
   logger.log('info', 'successfully restored cache');
 
