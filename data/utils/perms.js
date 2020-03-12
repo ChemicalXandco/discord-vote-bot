@@ -41,6 +41,10 @@ module.exports = {
     check: function (guildId, user) {
         let perms = getPerms()
 
+        if (!(guildId in perms)) {
+            return true
+        }
+
         perms[guildId].forEach(function (item, index) {
             if (user.roles.has(item)) {
                 return true
