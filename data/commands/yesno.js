@@ -2,10 +2,15 @@ const Discord = require('discord.js');
 const uuidv1 = require('uuid/v1');
 
 const reactionpoll = require('../utils/reactionpoll')
+const perms = require('../utils/perms')
 
 const emojiList = ['✅','❎'];
 
 module.exports.run = (client, message, args, config, color) => {
+
+        if (!perms.check(message.guild.id, message)) {
+                return message.channel.send('You do not have permission to use that command!')
+        }
 
         args.shift()
         var time = args.shift()
