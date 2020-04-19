@@ -1,8 +1,9 @@
 const Discord = require('discord.js');
 const uuidv1 = require('uuid/v1');
 
-const reactionpoll = require('../utils/reactionpoll')
-const perms = require('../utils/perms')
+const reactionpoll = require('../utils/reactionpoll');
+const perms = require('../utils/perms');
+const footer = require('../utils/footer');
 
 const emojiList = ['🇦','🇧','🇨','🇩','🇪','🇫','🇬','🇭','🇮','🇯','🇰','🇱','🇲','🇳','🇴','🇵','🇶','🇷','🇸','🇹','🇺','🇻','🇼','🇽','🇾','🇿'];
 
@@ -17,6 +18,10 @@ module.exports.run = (client, message, args, config, color) => {
         
         var options = args.join(' ').split(';')
         var question = options.pop()
+
+        if (options.length < 2) {
+                return message.channel.send('You must have at least 2 semi colon seperated options in this command (do not forget the semi colon at the end of the last option)')
+        }
 
         if (options.length > 20) {
                 options = options.slice(0, 20)
@@ -36,6 +41,7 @@ module.exports.run = (client, message, args, config, color) => {
         .setTitle(question)
         .setAuthor(message.member.user.tag, message.member.user.avatarURL)
         .setDescription(pollText + optionText)
+        .setFooter(footer.get())
 
         message.channel.send(embed)
         .then(message => reactionpoll.run(uuidv1(), time, options, message, embed, emojiList, true))
