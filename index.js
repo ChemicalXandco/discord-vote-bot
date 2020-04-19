@@ -53,7 +53,8 @@ client.once('ready', () => {
       channel.fetchMessage(cacheFile[uid]["message"]["id"])
         .then(message => reactionpoll.run(uid, cacheFile[uid]['time'], cacheFile[uid]['options'], message, cacheFile[uid]['embed'], cacheFile[uid]['emojiList'], false))
         .catch(error => {
-          console.error('onRejected function called: ' + error.message);
+          console.error('onRejected function called: ' + error.message)
+          cache.del(uid)
         })
     } catch (err) {
       cache.del(uid)
