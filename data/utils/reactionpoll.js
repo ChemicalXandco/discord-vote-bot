@@ -49,7 +49,7 @@ module.exports = {
                     else if(reactionCountsArray[i] === max) indexMax.push(i);
 
                 // Display winner(s)
-                var winnersText = '';
+                var winnersText = 'Unknown';
                 if (reactionCountsArray[indexMax[0]] == 0) {
                     winnersText = 'No one voted!'
                 } else {
