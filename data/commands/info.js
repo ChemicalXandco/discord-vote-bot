@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 
+const cache = require('../utils/cache');
+
 module.exports.run = (client, message, args, config, color) => {
 
         let totalSeconds = (client.uptime / 1000);
@@ -18,6 +20,7 @@ module.exports.run = (client, message, args, config, color) => {
                 'Version: ' + config.version +
                 '\nNumber of guilds: ' + client.guilds.size + 
                 '\nNumber of commands: ' + client.commands.size +
+                '\nNumber of polls currently happening: ' + cache.count() +
                 '\nPing: ' + client.ping +
                 '\nUptime: ' + uptime,
                 true)

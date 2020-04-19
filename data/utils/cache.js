@@ -36,5 +36,10 @@ module.exports = {
         let cache = getCache()
         delete cache[uid]
         saveCache(cache)
+    },
+
+    count: function () {
+        let cache = getCache()
+        return Object.keys(cache).length
     }
 }
