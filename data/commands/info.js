@@ -2,6 +2,11 @@ const Discord = require('discord.js');
 
 const cache = require('../utils/cache');
 
+module.exports = {
+        'args': 'None',
+        'desc': 'Statistics, information and links related to this bot.'
+}
+
 module.exports.run = (client, message, args, config, color) => {
 
         let totalSeconds = (client.uptime / 1000);

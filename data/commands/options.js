@@ -7,6 +7,13 @@ const footer = require('../utils/footer');
 
 const emojiList = ['🇦','🇧','🇨','🇩','🇪','🇫','🇬','🇭','🇮','🇯','🇰','🇱','🇲','🇳','🇴','🇵','🇶','🇷','🇸','🇹','🇺','🇻','🇼','🇽','🇾','🇿'];
 
+module.exports = {
+        'args': '`[time]` - The time in minutes to run the poll for.\n'+
+                "`[options]` - The options that will be in the poll, seperated by semi colons, e.g. eggs;ham;peanut butter; (don't forget the ; at the end!)\n"+
+                '`[question]` - The title of the embed.',
+        'desc': 'Starts a reaction-based poll with up to 20 options (reaction limit).'
+}
+
 module.exports.run = (client, message, args, config, color) => {
 
         if (!perms.check(message.guild.id, message)) {

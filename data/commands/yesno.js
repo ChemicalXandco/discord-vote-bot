@@ -7,6 +7,12 @@ const footer = require('../utils/footer');
 
 const emojiList = ['✅','❎'];
 
+module.exports = {
+        'args': '`[time]` - The time in minutes to run the poll for.\n'+
+                '`[question]` - The title of the embed.',
+        'desc': 'Starts a reaction-based poll with 2 options, yes or no.'
+}
+
 module.exports.run = (client, message, args, config, color) => {
 
         if (!perms.check(message.guild.id, message)) {

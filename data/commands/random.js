@@ -6,6 +6,11 @@ function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
 }
 
+module.exports = {
+        'args': '`[options]` - The options that can be selected, seperated by semi colons, e.g. eggs;ham;peanut butter',
+        'desc': 'Picks a random item from a list.'
+}
+
 module.exports.run = (client, message, args, config, color) => {
 
         args.shift()

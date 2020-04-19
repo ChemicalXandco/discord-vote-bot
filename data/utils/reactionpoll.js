@@ -54,6 +54,9 @@ module.exports = {
                     winnersText = 'No one voted!'
                 } else {
                     for (var i = 0; i < indexMax.length; i++) {
+                        if (winnersText === 'Unknown') {
+                            winnersText = ''
+                        }
                         winnersText += emojiList[indexMax[i]] + ': ' + options[indexMax[i]] + ' (' + reactionCountsArray[indexMax[i]] + ' vote(s))\n';
                     }
                 }
