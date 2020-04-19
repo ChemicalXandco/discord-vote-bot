@@ -20,7 +20,7 @@ module.exports.run = (client, message, args, config, color) => {
         var question = options.pop()
 
         if (options.length < 2) {
-                return message.channel.send('You must have at least 2 semi colon seperated options in this command (do not forget the semi colon at the end of the last option)')
+                return message.channel.send('You must have at least 2 semi colon seperated options in this command. (do not forget the semi colon at the end of the last option)')
         }
 
         if (options.length > 20) {
