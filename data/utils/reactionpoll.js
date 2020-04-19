@@ -38,8 +38,8 @@ module.exports = {
                 var reactionCountsArray = [];                               
                 for (var i = 0; i < options.length; i++) {
                     try {
-                        reactionCountsArray[i] = message.reactions.get(emojiList[i]).count-1;
-                    } catch(err) {}
+                        reactionCountsArray[i] = await message.reactions.get(emojiList[i]).count-1;
+                    } catch(err) { message.edit(embed.addField('Error', err)); }
                 }
 
                 // Find winner(s)

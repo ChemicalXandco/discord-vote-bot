@@ -8,7 +8,8 @@ const cache = require('./data/utils/cache');
 
 const logger = winston.createLogger({
   transports: [
-    new winston.transports.File({ filename: './combined.log' })
+    new winston.transports.File({ filename: './combined.log' }),
+    new winston.transports.Console()
   ],
   exceptionHandlers: [
     new winston.transports.File({ filename: './exceptions.log' })
