@@ -57,7 +57,11 @@ module.exports = {
         let roleNames = []
 
         perms[message.guild.id].forEach(function (item, index) {
-            roleNames.push('@'+message.guild.roles.get(item).name)
+            try {
+                roleNames.push('@'+message.guild.roles.get(item).name)
+            } catch(err) {
+                roleNames.push('@[Role removed]('+item+')')
+            }
         });
 
         if (roleNames.length < 1) {
