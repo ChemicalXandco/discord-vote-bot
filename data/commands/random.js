@@ -29,5 +29,5 @@ module.exports.run = (client, message, args, config, color) => {
         .setFooter(footer.get())
 
         message.channel.send(embed)
-    
+
 }

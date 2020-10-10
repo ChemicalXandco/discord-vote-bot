@@ -9,7 +9,7 @@ var getPerms = function (guildId) {
 
     if (!(guildId in perms)) {
         perms[guildId] = []
-    } 
+    }
 
     return perms
 }
@@ -74,7 +74,7 @@ module.exports = {
     check: function (guildId, message) {
         let perms = getPerms(guildId)
         let guildMember = message.guild.member(message.author)
-        
+
         if (guildMember.hasPermission('ADMINISTRATOR')) {
             return true
         }

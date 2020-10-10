@@ -5,7 +5,7 @@ const footersFile = './footers.txt'
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
-}  
+}
 
 module.exports = {
     get: function () {

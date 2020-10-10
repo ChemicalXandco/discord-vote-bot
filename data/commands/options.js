@@ -22,7 +22,7 @@ module.exports.run = (client, message, args, config, color) => {
 
         args.shift()
         var time = args.shift()
-        
+
         var options = args.join(' ').split(';')
         var question = options.pop()
 
@@ -42,7 +42,7 @@ module.exports.run = (client, message, args, config, color) => {
         }
 
         var pollText = "*Ends in "+time+" minutes*"
-    
+
         var embed = new Discord.RichEmbed()
         .setColor(color)
         .setTitle(question)
@@ -52,5 +52,5 @@ module.exports.run = (client, message, args, config, color) => {
 
         message.channel.send(embed)
         .then(message => reactionpoll.run(uuidv1(), time, options, message, embed, emojiList, true))
-    
+
 }

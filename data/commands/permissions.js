@@ -38,7 +38,7 @@ module.exports.run = (client, message, args, config, color) => {
     } else {
         var result = 'No command given, use `permissions add @role`'
     }
-    
+
     return message.channel.send(result)
-    
+
 }

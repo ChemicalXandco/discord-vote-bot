@@ -22,7 +22,7 @@ module.exports = {
             "embed": embed,
             "emojiList": emojiList
         }
-        
+
         return cache
     },
 

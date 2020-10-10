@@ -35,7 +35,7 @@ module.exports = {
             message.channel.fetchMessage(message.id)
             .then(async function (message) {
                 await sleep((time*60000)-timeElapsed)
-                var reactionCountsArray = [];                               
+                var reactionCountsArray = [];
                 for (var i = 0; i < options.length; i++) {
                     try {
                         reactionCountsArray[i] = await message.reactions.get(emojiList[i]).count-1;

@@ -6,7 +6,7 @@ module.exports = {
     }
 
 module.exports.run = (client, message, args, config, color) => {
-    
+
         var embed = new Discord.RichEmbed()
         .setColor(color)
         .setTitle(client.user.username + ' Help')
@@ -34,7 +34,7 @@ module.exports.run = (client, message, args, config, color) => {
                         embed.addField('Error', 'Command does not exist.')
                 }
         }
-                                    
+
         return message.channel.send(embed)
-    
+
 }
