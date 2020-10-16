@@ -9,7 +9,7 @@ const emojiList = ['✅','❎'];
 
 module.exports = {
         'args': '`[time]` - The time in minutes to run the poll for.\n'+
-                '`[question]` - The title of the embed.',
+                '`[question]` - The title of the embed, maximum 256 characters.',
         'desc': 'Starts a reaction-based poll with 2 options, yes or no.'
 }
 
@@ -22,6 +22,10 @@ module.exports.run = (client, message, args, config, color) => {
         args.shift()
         var time = args.shift()
         var question = args.join(' ')
+
+        if (question.length > 256) {
+                return message.channel.send("Question must not exceed 256 characters.")
+        }
 
         var embed = new Discord.RichEmbed()
         .setColor(color)

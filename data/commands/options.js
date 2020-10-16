@@ -10,7 +10,7 @@ const emojiList = ['🇦','🇧','🇨','🇩','🇪','🇫','🇬','🇭','🇮
 module.exports = {
         'args': '`[time]` - The time in minutes to run the poll for.\n'+
                 "`[options]` - The options that will be in the poll, seperated by semi colons, e.g. eggs;ham;peanut butter; (don't forget the ; at the end!)\n"+
-                '`[question]` - The title of the embed.',
+                '`[question]` - The title of the embed, maximum 256 characters.',
         'desc': 'Starts a reaction-based poll with up to 20 options (reaction limit).'
 }
 
@@ -25,6 +25,8 @@ module.exports.run = (client, message, args, config, color) => {
 
         var options = args.join(' ').split(';')
         var question = options.pop()
+
+        var pollText = "*Ends in "+time+" minutes*"
 
         if (options.length < 2) {
                 return message.channel.send('You must have at least 2 semi colon seperated options in this command. (do not forget the semi colon at the end of the last option)')
@@ -41,7 +43,9 @@ module.exports.run = (client, message, args, config, color) => {
         count += 1
         }
 
-        var pollText = "*Ends in "+time+" minutes*"
+        if (question.length > 256) {
+                return message.channel.send("Question must not exceed 256 characters.")
+        }
 
         var embed = new Discord.RichEmbed()
         .setColor(color)

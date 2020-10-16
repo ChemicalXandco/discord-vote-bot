@@ -33,7 +33,7 @@ module.exports.run = (client, message, args, config, color) => {
         if (perms.remove(message.guild.id, getRoleId(args[2]))) {
             var result = 'Role unwhitelisted'
         } else {
-            var result = 'Role was not whitelisted'
+            var result = 'Role was not already whitelisted'
         }
     } else {
         var result = 'No command given, use `permissions add @role`'
