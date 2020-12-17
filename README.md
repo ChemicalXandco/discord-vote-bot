@@ -1,9 +1,7 @@
 # discord-vote-bot
- a simple bot to run polls on discord written with discord.js
+ a simple bot to run polls on discord using discord.js
  
- [Invite](https://discordapp.com/oauth2/authorize?client_id=541310790658031626&scope=bot&permissions=85056)
- 
- [Discord Bots Listing](https://top.gg/bot/541310790658031626)
+# no longer maintained, use at your own risk
 
 # Setup 
 - add token to data/config.json
